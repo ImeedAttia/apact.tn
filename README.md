@@ -100,8 +100,7 @@ Manage our porject in github
 ## About The Project
 
   
-
-[![Product Name Screen Shot][product-screenshot]](/src\assets\screen-shot.jpg)
+<img  src="src\assets\screen-shot.jpg"  alt="screen shot"  width="80"  height="80">
 
   
 
