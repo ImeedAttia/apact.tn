@@ -100,7 +100,7 @@ Manage our porject in github
 ## About The Project
 
   
-<img  src="src\assets\screen-shot.jpg"  alt="screen shot"  width="80"  height="80">
+<img  src="src\assets\screen-shot.jpg"  alt="screen shot">
 
   
 
