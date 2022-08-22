@@ -22,6 +22,7 @@ import { DataService } from './services/data.service';
 import { UserService } from './services/user.service';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { FooterComponent } from './components/nav-footer/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
     ProfileComponent,
     LoginComponent,
     RegisterComponent,
-    SendPasswordResetComponent
+    SendPasswordResetComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
