@@ -1,0 +1,117 @@
+<!-- Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid justify-content-between">
+    <!-- Left elements -->
+    <div class="d-flex">
+      <!-- Brand -->
+      <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+        <img
+          [src]="LogoImgPath"
+          height="20"
+          alt="Logo Image"
+          loading="lazy"
+          style="margin-top: 2px;"
+        />
+      </a>
+
+      <!-- Search form -->
+      <form class="input-group w-auto my-auto d-none d-sm-flex">
+        <input
+          autocomplete="off"
+          type="search"
+          class="form-control rounded"
+          placeholder="Search"
+          style="min-width: 125px;"
+        />
+        <span class="input-group-text border-0 d-none d-lg-flex">
+          <mat-icon>search</mat-icon>
+        </span>
+      </form>
+    </div>
+    <!-- Center elements -->
+    <mat-chip-list  class="navbar-nav flex-row d-none d-md-flex" aria-label="Fish selection">
+      <mat-chip
+      routerLink="/home"
+      routerLinkActive="selectedNav"
+      title="profile"
+      >
+          <span>
+            <mat-icon>
+              home
+            </mat-icon>
+          </span> &nbsp; Home
+      </mat-chip>
+      <mat-chip
+      routerLink="/aboutus"
+      routerLinkActive="selectedNav"
+      title="profile"
+      >
+        <mat-icon>
+          public
+        </mat-icon>
+          About us
+        </mat-chip>
+    </mat-chip-list>
+    <!-- Right elements -->
+    <mat-chip-list aria-label="Fish selection">
+      <mat-chip
+        routerLink="/login"
+        routerLinkActive="selectedNav"
+        title="logout"
+        *ngIf="isLoggedIn"
+        (click)="logout()"
+        >
+          <span>
+            <mat-icon class="logout">
+              logout
+            </mat-icon>
+          </span> &nbsp; Logout
+      </mat-chip>
+      <mat-chip
+        routerLink="/login"
+        routerLinkActive="selectedNav"
+        title="login"
+        *ngIf="!isLoggedIn"
+        >
+          <span>
+            <mat-icon>
+              login
+            </mat-icon>
+          </span> &nbsp; Login
+      </mat-chip>
+      <mat-chip
+        routerLink="/register"
+        routerLinkActive="selectedNav"
+        title="register"
+        *ngIf="!isLoggedIn"
+        >
+          <span>
+            <mat-icon>
+              how_to_reg
+            </mat-icon>
+          </span> &nbsp; Register
+      </mat-chip>
+      <mat-chip
+        routerLink="/profile"
+        routerLinkActive="selectedNav"
+        title="profile"
+        *ngIf="isLoggedIn"
+        >
+          <img
+            [src]="userData.photoURL"
+            class="rounded-circle"
+            height="22"
+            alt=""
+            loading="lazy"
+          />
+          <strong
+          class="d-none d-sm-block ms-1"
+          >
+          &nbsp; {{userData.displayName}}
+          </strong>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+</nav>
+
+
