@@ -1,6 +1,33 @@
 section {
   padding-bottom: 30px;
 }
+@media (max-width: 450px) {
+  section {
+
+    margin-bottom: 120px;
+
+  }
+  }
+  .arabic-text {
+    text-align: right;
+  }
+
+  .w3-main{
+    margin-left: 320px;
+    margin-right: 100px;
+  }
+  @media(max-width : 1000px){
+    .w3-main{
+      margin-left: 30px;
+      margin-right: 30px;
+    }
+  }
+  @media(max-width : 450px){
+    .w3-main{
+      margin-left:6px;
+      margin-right: 6px;
+    }
+  }
 
 /*
 section {

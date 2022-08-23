@@ -21,10 +21,41 @@ height: 100%;
 section {
   display: block;
   height:78%;
-  width:99%;
   padding: 10px;
   padding-left: 120px;
   box-sizing:border-box;
 }
+@media (max-width: 1025px) {
+  section {
+    display: block;
+    height:100%;
+    width:99%;
+    padding: 10px;
+    margin-bottom: 120px;
+    box-sizing:border-box;
+  }
+  }
 
+@media (max-width: 450px) {
+  section {
+    display: block;
+    height:78%;
+    width:99%;
+    padding: 10px;
+    margin-bottom: 120px;
+    box-sizing:border-box;
+  }
+
+  }
+
+@media (max-width: 360px) {
+  section {
+    display: block;
+    height:100%;
+    width:100%;
+    margin-bottom: 120px;
+    box-sizing:border-box;
+  }
+
+  }
 

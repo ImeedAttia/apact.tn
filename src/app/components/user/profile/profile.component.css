@@ -6,3 +6,13 @@ section {
   padding-left: 120px;
   box-sizing:border-box;
 }
+@media(max-width:450px){
+  section {
+    display: block;
+    height:78%;
+    width:100%;
+    padding: 10px;
+    margin-bottom: 50px;
+    box-sizing:border-box;
+  }
+}
