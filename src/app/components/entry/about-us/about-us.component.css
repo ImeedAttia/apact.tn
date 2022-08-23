@@ -1,4 +1,9 @@
 section {
+  padding-bottom: 30px;
+}
+
+/*
+section {
   display: block;
   height:78%;
   width:99%;
@@ -6,3 +11,4 @@ section {
   padding-left: 120px;
   box-sizing:border-box;
 }
+*/
