@@ -11,6 +11,9 @@ import { SecureInnerPagesGuard } from './guards/secure-inner-pages.guard';
 
 const routes: Routes = [
   {
+    path:'', component: HomePageComponent
+  },
+  {
     path:'login', component: LoginComponent, canActivate: [SecureInnerPagesGuard]
   },
   {
