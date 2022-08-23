@@ -115,7 +115,7 @@ export class AuthService {
 
 
   FacebookAuth() {
-    return this.loginWithGoogle(new FacebookAuthProvider());
+    return this.loginWithFacebook(new FacebookAuthProvider());
   }
 
 
