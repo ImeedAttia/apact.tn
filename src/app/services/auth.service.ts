@@ -5,6 +5,7 @@ import {
   Auth,
   authState,
   createUserWithEmailAndPassword,
+  FacebookAuthProvider,
   getAuth,
   GoogleAuthProvider,
   isSignInWithEmailLink,
@@ -111,4 +112,21 @@ export class AuthService {
   sendEmailVerification(){
     return sendEmailVerification(this.auth.currentUser as User);
   }
+
+
+  FacebookAuth() {
+    return this.loginWithGoogle(new FacebookAuthProvider());
+  }
+
+
+  loginWithFacebook(provider :any) {
+    return signInWithPopup(this.auth,provider).then((result) => {
+      const credential = FacebookAuthProvider.credentialFromResult(result);
+      const accessToken = credential?.accessToken;
+      console.log(accessToken);
+      window.location.reload();
+    })
+  }
+
+
 }

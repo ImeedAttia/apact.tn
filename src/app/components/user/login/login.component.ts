@@ -61,5 +61,9 @@ export class LoginComponent implements OnInit {
     this.authService.GoogleAuth().catch((error : any) => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌')})
 
   }
+  facebookSignin(){
+    this.authService.FacebookAuth().catch((error : any) => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌')})
+
+  }
 
 }

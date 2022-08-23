@@ -20,8 +20,11 @@ export class NavBarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.authService.getAuthLocal();
-    this.refreshProfile();
+    if(this.isLoggedIn = !!this.authService.getAuthLocal()){
+      this.refreshProfile();
+    }
+
+
   }
 
   refreshProfile(){
