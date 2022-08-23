@@ -48,12 +48,12 @@ section {
 
   }
 
-@media (max-width: 360px) {
+@media (max-width: 440px) {
   section {
     display: block;
     height:100%;
     width:100%;
-    margin-bottom: 120px;
+    margin-bottom: 200px;
     box-sizing:border-box;
   }
 

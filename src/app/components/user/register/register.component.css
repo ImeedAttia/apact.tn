@@ -26,3 +26,13 @@ section {
     box-sizing:border-box;
   }
   }
+  @media (max-width: 440px) {
+    section {
+      display: block;
+      height:100%;
+      width:100%;
+      margin-bottom: 200px;
+      box-sizing:border-box;
+    }
+
+    }
