@@ -7,14 +7,13 @@
           class="img-fluid" alt="Login Image">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()"><br>
           <!-- Connect with google -->
           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-            <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+            <p class="lead fw-normal mb-2 me-3">Sign in with</p>
              <!-- Connect with google -->
-            <button mat-raised-button class="btn btn-danger" type="button" (click)="googlesignin()" ><i class="fa fa-google-plus"></i>&nbsp;Google</button>&nbsp;&nbsp;&nbsp;
-            <button mat-raised-button class="btn btn-primary" type="button" (click)="facebookSignin()" ><i class="fa fa-facebook"></i>&nbsp;Facebook</button>
-
+              <button mat-raised-button class="btn btn-danger" type="button" (click)="googlesignin()" ><i class="fa fa-google-plus"></i>&nbsp;Google</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button mat-raised-button class="btn btn-primary" type="button" (click)="facebookSignin()" ><i class="fa fa-facebook"></i>&nbsp;Facebook</button>
           </div>
           <!-- -----or-------- -->
           <div class="divider d-flex align-items-center my-4">
