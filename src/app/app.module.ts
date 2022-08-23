@@ -23,7 +23,6 @@ import { UserService } from './services/user.service';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { FooterComponent } from './components/nav-footer/footer/footer.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -48,8 +47,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    NgxSpinnerModule,
-    BrowserAnimationsModule
+
   ],
   providers: [
     DataService,
