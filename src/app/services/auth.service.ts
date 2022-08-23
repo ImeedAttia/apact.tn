@@ -3,12 +3,9 @@ import {sendEmailVerification } from "firebase/auth";
 
 import {
   Auth,
-  authState,
   createUserWithEmailAndPassword,
   FacebookAuthProvider,
-  getAuth,
   GoogleAuthProvider,
-  isSignInWithEmailLink,
   onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
@@ -88,42 +85,35 @@ export class AuthService {
 
   logout() {
      signOut(this.auth).then(()=>this.router.navigate(['/login']))
-
   }
-
-
 
   GoogleAuth() {
     return this.loginWithGoogle(new GoogleAuthProvider());
   }
-
 
   loginWithGoogle(provider :any) {
     return signInWithPopup(this.auth,provider).then(() => {
       window.location.reload();
     })
   }
- async  sendPasswordResetEmails(email : string){
+
+  async  sendPasswordResetEmails(email : string){
     return sendPasswordResetEmail(this.auth,email);
   }
-
-
 
   sendEmailVerification(){
     return sendEmailVerification(this.auth.currentUser as User);
   }
 
-
   FacebookAuth() {
     return this.loginWithFacebook(new FacebookAuthProvider());
   }
 
-
   loginWithFacebook(provider :any) {
     return signInWithPopup(this.auth,provider).then((result) => {
-      const credential = FacebookAuthProvider.credentialFromResult(result);
-      const accessToken = credential?.accessToken;
-      console.log(accessToken);
+      //const credential = FacebookAuthProvider.credentialFromResult(result);
+      //const accessToken = credential?.accessToken;
+      //console.log(accessToken);
       window.location.reload();
     })
   }

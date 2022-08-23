@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
   }
   facebookSignin(){
     this.authService.FacebookAuth().catch((error : any) => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌');console.log(error)})
-
   }
 
 }
