@@ -27,17 +27,19 @@ export class RegisterComponent implements OnInit {
     // attribute to check slide wither checked or not
     IsAccepted =false;
 
-    //form group
-  form : FormGroup = new FormGroup({
+  //form group
+  form : FormGroup = new FormGroup(
+    {
       email: new FormControl("",[Validators.required,Validators.email]),
       password : new FormControl("",[Validators.required,Validators.minLength(8),Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")]),
-      cPassword : new FormControl("",[Validators.required]),
-      },
-      {validators : Usernamevalidator.passwordMatch('password', 'cPassword')}
+      cPassword : new FormControl("",[Validators.required])
+    },
+    {
+      validators : Usernamevalidator.passwordMatch('password', 'cPassword')
+    }
     );
 
   //get all Form Fields
-
   get email(){
     return this.form.get("email");
   }
@@ -57,20 +59,19 @@ export class RegisterComponent implements OnInit {
     this.isSubmited = true;
     if(!this.form.invalid && this.IsAccepted){
       const user ={
-
         "email"     : this.email?.value,
         "password"  : this.password?.value,
-      }
-      this.authService.register(user).catch((error : any) => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌');})
+      };
+      this.authService.register(user).catch((error : any) => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌')});
     }else{
       this._snackBar.open("Enter a valid informations !!!", '❌');
     }
   }
 
   googlesignin(){
-    this.authService.GoogleAuth().catch((error:any) => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌')})
+    this.authService.GoogleAuth().catch((error:any) => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌')});
   }
   facebookSignin(){
-    this.authService.FacebookAuth().catch((error : any) => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌');console.log(error)})
+    this.authService.FacebookAuth().catch((error : any) => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌')});
   }
 }

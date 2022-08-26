@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   constructor(private authService : AuthService,private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-
   }
 
   //Declaration
@@ -48,21 +47,19 @@ export class LoginComponent implements OnInit {
   // submit fntc
   onSubmit() {
     const LoginInfo = {'email' : this.email?.value,'password' : this.password?.value};
-    if(this.form.valid){
-      this.authService.login(LoginInfo).catch((error : any) => {this._snackBar.open(FirebaseErrors.Parse(error.code), '❌')})}
-    else{
+    if(this.form.valid)
+    {
+      this.authService.login(LoginInfo).catch((error : any) => this._snackBar.open(FirebaseErrors.Parse(error.code), '❌'));
+    }else
+    {
       this._snackBar.open("Enter a valid informations !!!", '❌');
-
     }
-
-
   }
   googlesignin(){
-    this.authService.GoogleAuth().catch((error : any) => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌')})
-
+    this.authService.GoogleAuth().catch((error : any) => this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌'));
   }
   facebookSignin(){
-    this.authService.FacebookAuth().catch((error : any) => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌');console.log(error)})
+    this.authService.FacebookAuth().catch((error : any) => this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌'));
   }
 
 }

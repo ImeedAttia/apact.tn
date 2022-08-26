@@ -4,9 +4,9 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img [src]="userData.photoURL" alt="avatar"
+            <img [src]="userDataProfile.photoURL" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
-            <h5 class="my-3">{{userData.displayName}}</h5>
+            <h5 class="my-3">{{userDataProfile.displayName}}</h5>
             <div class="d-flex justify-content-center mb-2">
             </div>
           </div>
@@ -20,7 +20,7 @@
                 <p class="mb-0">Full Name</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{userData.displayName}}</p>
+                <p class="text-muted mb-0">{{userDataProfile.displayName}}</p>
               </div>
             </div>
             <hr>
@@ -29,7 +29,7 @@
                 <p class="mb-0">Email</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{userData.email}}</p>
+                <p class="text-muted mb-0">{{userDataProfile.email}}</p>
               </div>
             </div>
             <hr>
@@ -37,9 +37,80 @@
               <div class="col-sm-3">
                 <p class="mb-0">Phone</p>
               </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">+216 {{userData.phone}}</p>
+                <ng-template [ngIf]="userDataProfile.phoneNumber != ''" >
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">+216 {{userDataProfile.phoneNumber}}</p>
+                  </div>
+                </ng-template>
+
+              <ng-template [ngIf]="userDataProfile.phoneNumber == '' && !phoneInput" >
+                <div class="col-sm-9">
+                <mat-chip-list aria-label="Dog selection">
+                  <mat-chip color="warn" (click)="clickToShowOrHideInput()" selected>
+                    click to add a phone number
+                  </mat-chip>
+                </mat-chip-list>
               </div>
+            </ng-template>
+
+              <ng-template [ngIf]="phoneInput" >
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                  <div class="d-flex flex-row align-items-center mb-3">
+                    <i class="me-3">
+                      <mat-icon>
+                        phone
+                      </mat-icon>
+                    </i>
+                    <mat-form-field class="form-outline flex-fill mb-0" appearance="fill">
+                      <mat-label
+                        class="form-label"
+                        for="phone"
+                      >
+                        Phone Number
+                      </mat-label>
+                      <input
+                        matInput
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter a valid phone number"
+                        formControlName="phone"
+                        [errorStateMatcher]="matcher"
+                        name="phone"
+                        maxlength="8"
+                        required
+                        />
+                      <mat-error
+                        *ngIf="phone?.hasError('pattern') && !phone?.hasError('required')">
+                        Please enter a valid <strong>phone</strong> number
+                      </mat-error>
+                      <mat-error
+                        *ngIf="phone?.hasError('required')">
+                        phone number is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                   <!--Register Button-->
+          <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+            <button
+              mat-raised-button
+              type="submit"
+              color="primary"
+              class="btn btn-primary btn-lg btn-block">
+              &nbsp;&nbsp;  Add phone number &nbsp;&nbsp;
+            </button> &nbsp;&nbsp;&nbsp;
+            <button
+            mat-raised-button
+            type="reset"
+            color="warn"
+            class="btn btn-primary btn-lg btn-block"
+            (click)="clickToShowOrHideInput()"
+            >
+            &nbsp;&nbsp;&nbsp;  Cancel  &nbsp;&nbsp;
+          </button>
+          </div>
+                </form>
+              </ng-template>
+
             </div>
             <hr>
             <div class="row">
@@ -50,20 +121,31 @@
                   <p class="text-muted mb-0">
 
                     <mat-chip-list aria-label="Dog selection">
-                      <mat-chip [color]="userData.emailVerified" selected>
+                      <mat-chip [color]="userDataProfile.emailVerified" selected>
                          verified
                       </mat-chip>
 
-                      <div class="example-button-container" *ngIf="userData.emailVerified == 'warn'" >
+                      <div class="example-button-container" *ngIf="userDataProfile.emailVerified == 'warn'" >
                         click to send email verification &nbsp;&nbsp;&nbsp;
-                        <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" (click)="send()" >
-                          <mat-icon>forward</mat-icon>
+                        <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" (click)="sendEmailVerification()" >
                         </button>
                       </div>
                     </mat-chip-list>
                   </p>
               </div>
             </div>
+            <ng-template [ngIf]="userDataProfile.Cin">
+              <hr>
+              <div class="row"  >
+                <div class="col-sm-3">
+                  <p class="mb-0">Cin</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{userDataProfile.Cin}}</p>
+                </div>
+              </div>
+            </ng-template>
+
           </div>
         </div>
       </div>
