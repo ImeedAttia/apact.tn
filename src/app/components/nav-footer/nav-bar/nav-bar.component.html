@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" routerLink="/home">
         <img src="https://firebasestorage.googleapis.com/v0/b/apact---tn.appspot.com/o/clipart2445863.png?alt=media&token=29f36032-e582-4f58-9963-d9c8963392d7" alt="" width="30" height="24" class="d-inline-block align-text-top">
         Apact
       </a>
@@ -58,7 +58,7 @@
               </a>
             </li>
           </ng-template>
-                    <!-- login-->
+          <!-- login-->
           <ng-template [ngIf]="!isLoggedIn">
             <li class="nav-item">
               <a class="nav-link" routerLink="/login">
