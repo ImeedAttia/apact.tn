@@ -43,73 +43,73 @@
                   </div>
                 </ng-template>
 
-              <ng-template [ngIf]="userDataProfile.phoneNumber == '' && !phoneInput" >
-                <div class="col-sm-9">
-                <mat-chip-list aria-label="Dog selection">
-                  <mat-chip color="warn" (click)="clickToShowOrHideInput()" selected>
-                    click to add a phone number
-                  </mat-chip>
-                </mat-chip-list>
-              </div>
-            </ng-template>
+                <ng-template [ngIf]="userDataProfile.phoneNumber == '' && !phoneInput" >
+                  <div class="col-sm-9">
+                  <mat-chip-list aria-label="Dog selection">
+                    <mat-chip color="warn" (click)="clickToShowOrHideInput()" selected>
+                      click to add a phone number
+                    </mat-chip>
+                  </mat-chip-list>
+                </div>
+                </ng-template>
 
-              <ng-template [ngIf]="phoneInput" >
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                  <div class="d-flex flex-row align-items-center mb-3">
-                    <i class="me-3">
-                      <mat-icon>
-                        phone
-                      </mat-icon>
-                    </i>
-                    <mat-form-field class="form-outline flex-fill mb-0" appearance="fill">
-                      <mat-label
-                        class="form-label"
-                        for="phone"
-                      >
-                        Phone Number
-                      </mat-label>
-                      <input
-                        matInput
-                        type="tel"
-                        id="phone"
-                        placeholder="Enter a valid phone number"
-                        formControlName="phone"
-                        [errorStateMatcher]="matcher"
-                        name="phone"
-                        maxlength="8"
-                        required
-                        />
-                      <mat-error
-                        *ngIf="phone?.hasError('pattern') && !phone?.hasError('required')">
-                        Please enter a valid <strong>phone</strong> number
-                      </mat-error>
-                      <mat-error
-                        *ngIf="phone?.hasError('required')">
-                        phone number is <strong>required</strong>
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                   <!--Register Button-->
-          <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-            <button
+                <ng-template [ngIf]="phoneInput" >
+                  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="d-flex flex-row align-items-center mb-3">
+                      <i class="me-3">
+                        <mat-icon>
+                          phone
+                        </mat-icon>
+                      </i>
+                      <mat-form-field class="form-outline flex-fill mb-0" appearance="fill">
+                        <mat-label
+                          class="form-label"
+                          for="phone"
+                        >
+                          Phone Number
+                        </mat-label>
+                        <input
+                          matInput
+                          type="tel"
+                          id="phone"
+                          placeholder="Enter a valid phone number"
+                          formControlName="phone"
+                          [errorStateMatcher]="matcher"
+                          name="phone"
+                          maxlength="8"
+                          required
+                          />
+                        <mat-error
+                          *ngIf="phone?.hasError('pattern') && !phone?.hasError('required')">
+                          Please enter a valid <strong>phone</strong> number
+                        </mat-error>
+                        <mat-error
+                          *ngIf="phone?.hasError('required')">
+                          phone number is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <!--Register Button-->
+            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+              <button
+                mat-raised-button
+                type="submit"
+                color="primary"
+                class="btn btn-primary btn-lg btn-block">
+                &nbsp;&nbsp;  Add phone number &nbsp;&nbsp;
+              </button> &nbsp;&nbsp;&nbsp;
+              <button
               mat-raised-button
-              type="submit"
-              color="primary"
-              class="btn btn-primary btn-lg btn-block">
-              &nbsp;&nbsp;  Add phone number &nbsp;&nbsp;
-            </button> &nbsp;&nbsp;&nbsp;
-            <button
-            mat-raised-button
-            type="reset"
-            color="warn"
-            class="btn btn-primary btn-lg btn-block"
-            (click)="clickToShowOrHideInput()"
-            >
-            &nbsp;&nbsp;&nbsp;  Cancel  &nbsp;&nbsp;
-          </button>
-          </div>
-                </form>
-              </ng-template>
+              type="reset"
+              color="warn"
+              class="btn btn-primary btn-lg btn-block"
+              (click)="clickToShowOrHideInput()"
+              >
+              &nbsp;&nbsp;&nbsp;  Cancel  &nbsp;&nbsp;
+            </button>
+            </div>
+                  </form>
+                </ng-template>
 
             </div>
             <hr>

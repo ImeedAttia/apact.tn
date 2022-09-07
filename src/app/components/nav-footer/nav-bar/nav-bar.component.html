@@ -9,7 +9,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-           <!-- Home Page-->
+          <mat-chip-list aria-label="Fish selection">
+          <!-- Home Page-->
           <li class="nav-item">
             <a class="nav-link" routerLink="/home">
               <mat-chip
@@ -27,7 +28,8 @@
           </li>
           <!-- About Us-->
           <li class="nav-item">
-            <a class="nav-link"><mat-chip
+            <a class="nav-link" routerLink="/aboutus">
+              <mat-chip
               routerLink="/aboutus"
               routerLinkActive="selectedNav"
               title="profile"
@@ -116,6 +118,7 @@
               </a>
             </li>
           </ng-template>
+        </mat-chip-list>
         </ul>
       </div>
     </div>
