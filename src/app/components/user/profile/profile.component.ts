@@ -23,20 +23,19 @@ export class ProfileComponent implements OnInit {
     phoneInput:boolean = false;
 
   ngOnInit(): void {
+    console.log(this.authService.getAuthLocal())
     this.refreshProfile()
   }
 
   async refreshProfile(){
-    this.userDataProfile =(await this.UserService.get(this.authService.getAuthLocal().uid as string)).data() as UserData;
+    this.userDataProfile = this.authService.getAuthLocal();
     this.userDataProfile = {
       'uid'           : this.userDataProfile.uid,
       "displayName"   : this.userDataProfile.displayName ? this.userDataProfile.displayName : "foulen ben foulen",
       "email"         : this.userDataProfile.email,
       "phoneNumber"   : this.userDataProfile.phoneNumber ? this.userDataProfile.phoneNumber : '',
       "emailVerified" : this.userDataProfile.emailVerified ? 'primary' : 'warn',
-      "photoURL"      : this.userDataProfile.photoURL ? this.userDataProfile.photoURL :   "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp",
-      "Cin"           : this.userDataProfile.Cin
-    }
+      "photoURL"      : this.userDataProfile.photoURL ? this.userDataProfile.photoURL :   "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"    }
   }
 
   clickToShowOrHideInput(){
