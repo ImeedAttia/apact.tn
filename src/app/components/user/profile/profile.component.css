@@ -21,8 +21,18 @@ section {
     display: block;
     height:78%;
     width:100%;
-    padding: 10px;
-    margin-bottom: 200px;
+    padding: 30px;
+    margin-bottom: 300px;
+    box-sizing:border-box;
+  }
+}
+@media(max-width:380px){
+  section {
+    display: block;
+    height:78%;
+    width:100%;
+    padding: 30px;
+    margin-bottom: 300px;
     box-sizing:border-box;
   }
 }
