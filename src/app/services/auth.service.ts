@@ -90,27 +90,26 @@ export class AuthService {
       signOut(this.auth).then(()=>this.router.navigate(['/login']))
     }
 
-
-
-
-
-
-
   //login with Email or Facebook
     //Login with Google
     GoogleAuth() {
       return this.loginWithPopup(new GoogleAuthProvider());
     }
+
+
     //Login with Facebook
-    FacebookAuth() {
-      return this.loginWithPopup(new FacebookAuthProvider());
-    }
+    //FacebookAuth() {
+    //  return this.loginWithPopup(new FacebookAuthProvider());
+    //}
+
+
     //Pop Up Provider
     loginWithPopup(provider :any) {
       return signInWithPopup(this.auth,provider).then(async (result) => {
+
         if(!(await this.userService.get(result.user.uid)).exists()){
           const  user = this.UserMakeData(result);
-          this.userService.createData(user);
+          this.userService.createData(user).then((res) => console.log(res)).catch((error) => console.log(error));
         }
         window.location.reload();
       });
