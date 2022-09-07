@@ -14,7 +14,7 @@ import { UserData } from './../../../moddels/user';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private authService : AuthService,private UserService : UserService,private _snackBar: MatSnackBar) {}
+  constructor(private authService : AuthService,private UserService : AuthService,private _snackBar: MatSnackBar) {}
     //variable have all user data
     userDataProfile : any ={};
     // check the form is submitted or not yet
@@ -58,9 +58,9 @@ export class ProfileComponent implements OnInit {
     if(!this.form.invalid){
      this.userDataProfile.phoneNumber = this.phone?.value;
       alert(this.phone?.value)
-      this.UserService.updateData(this.userDataProfile)
-      .then(()=>{ window.location.reload(); this._snackBar.open("Email Sent successfully please check your spam!", '✅');})
-      .catch((error : any)  => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌')})
+      this.UserService.update(this.phone?.value)
+     // .then(()=>{ window.location.reload(); this._snackBar.open("Email Sent successfully please check your spam!", '✅');})
+     // .catch((error : any)  => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌')})
     }else{
       this._snackBar.open("Enter a valid informations !!!", '❌');
     }

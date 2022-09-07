@@ -1,20 +1,21 @@
-import { Inject, Injectable,NgZone  } from '@angular/core';
+import { Injectable,NgZone  } from '@angular/core';
 import {sendEmailVerification } from "firebase/auth";
 
 import {
   Auth,
   createUserWithEmailAndPassword,
-  FacebookAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  PhoneAuthProvider,
+  RecaptchaVerifier,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  User,
+  updatePhoneNumber,
+  User
 } from '@angular/fire/auth';
-import { Analytics, setUserProperties } from "firebase/analytics";
-
+import { getAnalytics, setUserProperties } from "firebase/analytics";
 
 import { Router } from '@angular/router';
 import { Login } from '../moddels/login';
@@ -24,7 +25,9 @@ import { UserData } from '../moddels/user';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
+  analytics = getAnalytics();
 
   UserData : any;
 
@@ -136,6 +139,22 @@ export class AuthService {
     sendEmailVerification(){
       return sendEmailVerification(this.auth.currentUser as User );
     }
+   async update(phonenumber : any){
 
 
+      //https://firebase.google.com/docs/reference/js/v8/firebase.User#updatephonenumber
+      //https://firebase.google.com/docs/auth/web/phone-auth?authuser=4&hl=fr
+      //https://firebase.google.com/docs/auth/web/google-signin#:~:text=Enable%20Google%20as%20a%20sign,in%20method%20and%20click%20Save.
+      //
+
+
+      const applicationVerifier = new RecaptchaVerifier('recaptcha-container',this.auth,this.auth);
+      const provider = new PhoneAuthProvider(this.auth);
+      const verificationId = await provider.verifyPhoneNumber(phonenumber, applicationVerifier);
+      // Obtain the verificationCode from the user.
+      const verificationCode = '1231';
+      const phoneCredential = PhoneAuthProvider.credential(verificationId, verificationCode);
+      await updatePhoneNumber(this.auth.currentUser as User, phoneCredential);
+
+    }
 }
