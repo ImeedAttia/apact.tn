@@ -10,28 +10,28 @@ import {
   RecaptchaVerifier,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPhoneNumber,
   signInWithPopup,
   signOut,
   updatePhoneNumber,
   User
 } from '@angular/fire/auth';
-import { getAnalytics, setUserProperties } from "firebase/analytics";
-
 import { Router } from '@angular/router';
 import { Login } from '../moddels/login';
 import { UserService } from './user.service';
 import { UserData } from '../moddels/user';
-
+declare global {
+  interface Window {
+    recaptchaVerifier: RecaptchaVerifier;
+    recaptchaWidgetId : any;
+  }
+}
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  analytics = getAnalytics();
-
   UserData : any;
-
-
   constructor(private auth: Auth,private router : Router, public ngZone: NgZone,private userService : UserService){
     onAuthStateChanged(this.auth,(user: any)=>{
       if(user){
@@ -57,7 +57,7 @@ export class AuthService {
       const user = JSON.parse(token as string);
       return user;
     }
-        //Check wither User Is looged in or not
+    //Check wither User Is looged in or not
     get isLoggedIn(): boolean {
       const token = localStorage.getItem('user')
       const user = JSON.parse(token as string);
@@ -139,22 +139,30 @@ export class AuthService {
     sendEmailVerification(){
       return sendEmailVerification(this.auth.currentUser as User );
     }
-   async update(phonenumber : any){
-
-
+   async update(phonenumber : any,appVerifier : RecaptchaVerifier){
       //https://firebase.google.com/docs/reference/js/v8/firebase.User#updatephonenumber
       //https://firebase.google.com/docs/auth/web/phone-auth?authuser=4&hl=fr
       //https://firebase.google.com/docs/auth/web/google-signin#:~:text=Enable%20Google%20as%20a%20sign,in%20method%20and%20click%20Save.
-      //
+
+     // signInWithPhoneNumber(this.auth, phonenumber, appVerifier)
+     // .then((confirmationResult) => {
+        // SMS sent. Prompt user to type the code from the message, then sign the
+        // user in with confirmationResult.confirm(code).
+        // ...
+     //   console.log('sent',confirmationResult)
+     // }).catch((error) => {
+        // Error; SMS not sent
+       // console.log(' not sent',error)
+      //});
 
 
-      const applicationVerifier = new RecaptchaVerifier('recaptcha-container',this.auth,this.auth);
+
       const provider = new PhoneAuthProvider(this.auth);
-      const verificationId = await provider.verifyPhoneNumber(phonenumber, applicationVerifier);
+      const verificationId = await provider.verifyPhoneNumber(phonenumber, appVerifier);
       // Obtain the verificationCode from the user.
-      const verificationCode = '1231';
+      const verificationCode = '123456';
       const phoneCredential = PhoneAuthProvider.credential(verificationId, verificationCode);
-      await updatePhoneNumber(this.auth.currentUser as User, phoneCredential);
+      return await updatePhoneNumber(this.auth.currentUser as User, phoneCredential);
 
     }
 }

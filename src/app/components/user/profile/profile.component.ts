@@ -4,8 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FirebaseErrors } from 'src/app/moddels/firebase-errors';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorsStateMatcher } from '../Error-state-matcher';
-import { UserService } from 'src/app/services/user.service';
-import { UserData } from './../../../moddels/user';
+import { RecaptchaVerifier } from '@firebase/auth';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-profile',
@@ -14,17 +14,20 @@ import { UserData } from './../../../moddels/user';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private authService : AuthService,private UserService : AuthService,private _snackBar: MatSnackBar) {}
+  constructor(private auth: Auth,private authService : AuthService,private UserService : AuthService,private _snackBar: MatSnackBar) {}
     //variable have all user data
     userDataProfile : any ={};
     // check the form is submitted or not yet
     isSubmited:boolean=false;
     //phone change input field
     phoneInput:boolean = false;
-
+    // recaptcha app verifier
+    appVerifier !: RecaptchaVerifier;
+    // hide btn when  verifing recaptcha
+    btns : boolean=true;
   ngOnInit(): void {
-    console.log(this.authService.getAuthLocal())
     this.refreshProfile()
+    this.appVerifier = window.recaptchaVerifier;
   }
 
   async refreshProfile(){
@@ -52,15 +55,25 @@ export class ProfileComponent implements OnInit {
   matcher = new ErrorsStateMatcher();
 
   // submit fntc
-  onSubmit() {
+  async onSubmit() {
     // TODO: Use EventEmitter with form value
     this.isSubmited = true;
     if(!this.form.invalid){
      this.userDataProfile.phoneNumber = this.phone?.value;
-      alert(this.phone?.value)
-      this.UserService.update(this.phone?.value)
-     // .then(()=>{ window.location.reload(); this._snackBar.open("Email Sent successfully please check your spam!", '✅');})
-     // .catch((error : any)  => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌')})
+     const phoneNumber = '+216'+ this.phone?.value
+     window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+      'size': 'normal',
+      'callback': () => {
+      this.appVerifier = window.recaptchaVerifier;
+      this.UserService.update(phoneNumber,this.appVerifier)
+      .then(()=>{ window.location.reload(); this._snackBar.open("Code verfication est envoyer avec success", '✅');})
+      .catch((error : any)  => {this._snackBar.open(FirebaseErrors.Parse(error.code) , '❌');})
+      }
+    }, this.auth);
+    window.recaptchaVerifier.render().then((widgetId) => {
+      window.recaptchaWidgetId = widgetId;
+      this.btns=false;
+    });
     }else{
       this._snackBar.open("Enter a valid informations !!!", '❌');
     }

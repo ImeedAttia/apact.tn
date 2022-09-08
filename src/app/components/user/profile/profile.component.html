@@ -39,7 +39,7 @@
               </div>
                 <ng-template [ngIf]="userDataProfile.phoneNumber != ''" >
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">+216 {{userDataProfile.phoneNumber}}</p>
+                    <p class="text-muted mb-0">{{userDataProfile.phoneNumber}}</p>
                   </div>
                 </ng-template>
 
@@ -89,8 +89,9 @@
                         </mat-error>
                       </mat-form-field>
                     </div>
+                    <div id="recaptcha-container"></div>
                     <!--Register Button-->
-            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4" *ngIf="btns" >
               <button
                 mat-raised-button
                 type="submit"

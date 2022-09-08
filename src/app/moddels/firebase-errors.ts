@@ -39,7 +39,16 @@ export class FirebaseErrors {
       case 'auth/email-already-in-use':
         message = 'Email already in use';
         break;
-       default:
+      case 'auth/argument-error':
+        message = 'Votre saisie est incoorecte';
+        break;
+      case 'auth/invalid-verification-code':
+        message = 'Votre code de confirmation est invalide';
+        break;
+      case 'auth/account-exists-with-different-credential':
+        message = 'Ce Numero deja existe a un autre compte';
+        break;
+      default:
         message = 'Oops! Something went wrong. Try again later.';
         break;
     }
