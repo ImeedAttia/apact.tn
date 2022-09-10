@@ -23,6 +23,7 @@ import { UserService } from './services/user.service';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { FooterComponent } from './components/nav-footer/footer/footer.component';
+import { NgxOtpInputModule } from 'ngx-otp-input';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
@@ -45,6 +46,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxOtpInputModule,
+    NgxSpinnerModule.forRoot({ type:'ball-atom'}),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

@@ -57,6 +57,7 @@ export class AuthService {
       const user = JSON.parse(token as string);
       return user;
     }
+
     //Check wither User Is looged in or not
     get isLoggedIn(): boolean {
       const token = localStorage.getItem('user')
@@ -67,9 +68,7 @@ export class AuthService {
     //Form Register Method
     register({ email, password }: Login) {
       return createUserWithEmailAndPassword(this.auth, email, password)
-      .then((result: any) => {
-        const  user = this.UserMakeData(result);
-        this.userService.createData(user);
+      .then(() => {
         this.ngZone.run(() => {
           this.sendEmailVerification()
           window.location.reload();
@@ -77,6 +76,7 @@ export class AuthService {
         });
       })
     }
+
     //Form Login Method
     login({email ,password } : Login){
       return signInWithEmailAndPassword(this.auth, email, password)
@@ -108,29 +108,11 @@ export class AuthService {
 
     //Pop Up Provider
     loginWithPopup(provider :any) {
-      return signInWithPopup(this.auth,provider).then(async (result) => {
-
-        if(!(await this.userService.get(result.user.uid)).exists()){
-          const  user = this.UserMakeData(result);
-          this.userService.createData(user).then((res) => console.log(res)).catch((error) => console.log(error));
-        }
+      return signInWithPopup(this.auth,provider).then(() => {
         window.location.reload();
       });
     }
-    //Add User To database
-    UserMakeData(result ?: any){
-      const userImpl = result.user;
-      const user : UserData ={
-        uid: userImpl.uid,
-        email:userImpl.email,
-        displayName:userImpl.displayName,
-        photoURL:userImpl.photoURL,
-        emailVerified:userImpl.emailVerified,
-        phoneNumber : userImpl.phoneNumber,
-        Cin : null
-        }
-      return user;
-    }
+
     //Send Password Reset Email
     async sendPasswordResetEmails(email : string){
       return sendPasswordResetEmail(this.auth,email);
@@ -139,30 +121,5 @@ export class AuthService {
     sendEmailVerification(){
       return sendEmailVerification(this.auth.currentUser as User );
     }
-   async update(phonenumber : any,appVerifier : RecaptchaVerifier){
-      //https://firebase.google.com/docs/reference/js/v8/firebase.User#updatephonenumber
-      //https://firebase.google.com/docs/auth/web/phone-auth?authuser=4&hl=fr
-      //https://firebase.google.com/docs/auth/web/google-signin#:~:text=Enable%20Google%20as%20a%20sign,in%20method%20and%20click%20Save.
 
-     // signInWithPhoneNumber(this.auth, phonenumber, appVerifier)
-     // .then((confirmationResult) => {
-        // SMS sent. Prompt user to type the code from the message, then sign the
-        // user in with confirmationResult.confirm(code).
-        // ...
-     //   console.log('sent',confirmationResult)
-     // }).catch((error) => {
-        // Error; SMS not sent
-       // console.log(' not sent',error)
-      //});
-
-
-
-      const provider = new PhoneAuthProvider(this.auth);
-      const verificationId = await provider.verifyPhoneNumber(phonenumber, appVerifier);
-      // Obtain the verificationCode from the user.
-      const verificationCode = '123456';
-      const phoneCredential = PhoneAuthProvider.credential(verificationId, verificationCode);
-      return await updatePhoneNumber(this.auth.currentUser as User, phoneCredential);
-
-    }
 }
