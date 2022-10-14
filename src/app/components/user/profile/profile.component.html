@@ -94,11 +94,7 @@
                     <ng-template [ngIf]="recaptcha"><div id="recaptcha-container"></div></ng-template>
 
 
-                    <ng-template [ngIf]="otp">
-                      Svp De mettre votre code de confirmation
-                      <ngx-otp-input [config]="otpInputConfig"  (fill)="handleFillEvent($event)">
-                      </ngx-otp-input>
-                    </ng-template>
+
 
                     <!--Register Button-->
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4" *ngIf="btns" >

@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ErrorsStateMatcher } from '../Error-state-matcher';
 import { RecaptchaVerifier } from '@firebase/auth';
 import { Auth, onAuthStateChanged, PhoneAuthProvider, updatePhoneNumber, User } from '@angular/fire/auth';
-import { NgxOtpInputConfig } from 'ngx-otp-input';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -110,19 +109,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // otp options for code verification
-  otpInputConfig: NgxOtpInputConfig = {
-    otpLength: 6,
-    autofocus: true,
-    classList: {
-      inputBox: 'my-super-box-class',
-      input: 'my-super-class',
-      inputFilled: 'my-super-filled-class',
-      inputDisabled: 'my-super-disable-class',
-      inputSuccess: 'my-super-success-class',
-      inputError: 'my-super-error-class',
-    },
-  };
+
 
 
   //when the user compelete filling code verification store it in data base
@@ -149,7 +136,7 @@ export class ProfileComponent implements OnInit {
     }, 2000);
   }
 
-  
+
 
 
 }
